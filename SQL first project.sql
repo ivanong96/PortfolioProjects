@@ -7,7 +7,7 @@ From PortfolioProject..covidDeath
 order by 3,4
 
 SELECT * 
-From PortfolioProject..covidVacinations
+From PortfolioProject..covidVaccinations
 order by 3,4
 
 
@@ -64,12 +64,12 @@ where continent is not null
 order by 1,2 
 
 
--- Looking at total population vs vacinations
+-- Looking at total population vs vaccinations
 Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations 
 , SUM(CONVERT(float,vac.new_vaccinations)) OVER (Partition by dea.location Order by dea.location, dea.date)as PeopleVaccinated
 -- order by location and date will make it increment 
 From PortfolioProject..covidDeath dea
-Join PortfolioProject..covidVacinations vac
+Join PortfolioProject..covidVaccinations vac
 	On dea.location = vac.location
 	and dea.date = vac.date
 where dea.continent is not null
@@ -84,7 +84,7 @@ Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinatio
 , SUM(CONVERT(float,vac.new_vaccinations)) OVER (Partition by dea.location Order by dea.location, dea.date)as PeopleVaccinated
 -- order by location and date will make it increment 
 From PortfolioProject..covidDeath dea
-Join PortfolioProject..covidVacinations vac
+Join PortfolioProject..covidVaccinations vac
 	On dea.location = vac.location
 	and dea.date = vac.date
 where dea.continent is not null
@@ -112,7 +112,7 @@ Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinatio
 , SUM(CONVERT(float,vac.new_vaccinations)) OVER (Partition by dea.location Order by dea.location, dea.date)as PeopleVaccinated
 -- order by location and date will make it increment 
 From PortfolioProject..covidDeath dea
-Join PortfolioProject..covidVacinations vac
+Join PortfolioProject..covidVaccinations vac
 	On dea.location = vac.location
 	and dea.date = vac.date
 where dea.continent is not null
@@ -125,7 +125,7 @@ Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinatio
 , SUM(CONVERT(float,vac.new_vaccinations)) OVER (Partition by dea.location Order by dea.location, dea.date)as PeopleVaccinated
 -- order by location and date will make it increment 
 From PortfolioProject..covidDeath dea
-Join PortfolioProject..covidVacinations vac
+Join PortfolioProject..covidVaccinations vac
 	On dea.location = vac.location
 	and dea.date = vac.date
 where dea.continent is not null
