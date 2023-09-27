@@ -1,3 +1,7 @@
+/*
+Covid-19 Data Exploration
+*/
+
 SELECT * 
 From PortfolioProject..covidDeath
 order by 3,4
@@ -13,7 +17,7 @@ From PortfolioProject..covidDeath
 order by 1,2
 
 
--- Looking at Total Cases vs Total Deaths
+-- Looking at total cases vs total deaths
 -- Shows likelihood of dying if you contract covid in your country
 SELECT location, date, total_cases, total_deaths,(CONVERT(float,total_deaths)/(CONVERT(float,total_cases)))*100 as DeathPercentage
 From PortfolioProject..covidDeath
@@ -72,7 +76,7 @@ where dea.continent is not null
 order by 1,2,3
 
 
---Use CTE
+--Use CTE to perform calculation on partition by in previous query
 With PopvsVac(Continent, Location, Date, Population,New_Vaccinations, PeopleVaccinated)
 as
 (
@@ -91,7 +95,7 @@ Select *, (PeopleVaccinated/Population) as VaccinatedPercentage
 From PopvsVac
 
 
---Temp table
+--Temp table to perform calculation on partition by in previous query
 Drop Table if exists #PercentPopulationVaccinated
 Create Table #PercentPopulationVaccinated
 (
@@ -115,7 +119,7 @@ where dea.continent is not null
 --order by 1,2,3
 
 
---Creating View
+--Creating View to store data for later visualizations
 Create View PercentPopulationVaccinated as
 Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations 
 , SUM(CONVERT(float,vac.new_vaccinations)) OVER (Partition by dea.location Order by dea.location, dea.date)as PeopleVaccinated
